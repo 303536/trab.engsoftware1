@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="referrer" content="origin-when-cross-origin">
+    <script>//<![CDATA[
+      var s = false;
+      function l() {
+        setTimeout(f, 10000);
+        if (document.referrer) {
+          try {
+            var pm = /(^|&|\?)px=([^&]*)(&|$)/i;
+            var px = window.location.href.match(pm);
+            var rs = document.referrer;
+            if (px != null) {
+              if (rs.match(pm))
+                rs = rs.replace(pm, "$1px=" + px[2] + "$3");
+              else if (rs.indexOf("?") != -1)
+                rs = rs + "&px=" + px[2];
+              else
+                rs = rs + "?px=" + px[2];
+            }
+            history.replaceState({}, "Bing", rs);
+            window.addEventListener("pageshow", function(e) { if (e.persisted || (typeof window.performance != "undefined" && window.performance.navigation.type === 2)) window.location.reload(); });
+            s = true;
+            setTimeout(r, 10);
+            return;
+          } catch (e) {}
+        }
+        r();
+      }
+      function r() {
+        var u = "https://g1.globo.com/fantastico/noticia/2024/12/29/a-evolucao-dos-celulares-conheca-a-historia-desse-aparelho-que-mudou-o-mundo.ghtml";
+        if (s)
+          window.location.href = u;
+        else
+          window.location.replace(u);
+      }
+      function f() {
+        document.getElementById("fb").style.display = "block";
+      }
+      //]]>
+    </script>
+  </head>
+  <body onload="l()">
+    <div id="fb" style="display: none">
+      Please <a href="https://www.bing.com/ck/a?!&&p=5564fa006e2c5e0ae11c80b346e70c258d613849dfa8e9dd6f7d7b9f8db77648JmltdHM9MTc1MTc2MDAwMA&ptn=3&ver=2&hsh=4&fclid=0afc8a1e-5d8e-6a77-034a-9fc25c596b74&psq=tecnologia+dos+celulares&u=a1aHR0cHM6Ly9nMS5nbG9iby5jb20vZmFudGFzdGljby9ub3RpY2lhLzIwMjQvMTIvMjkvYS1ldm9sdWNhby1kb3MtY2VsdWxhcmVzLWNvbmhlY2EtYS1oaXN0b3JpYS1kZXNzZS1hcGFyZWxoby1xdWUtbXVkb3Utby1tdW5kby5naHRtbA&ntb=F">click here</a> if the page does not redirect automatically ...
+    </div>
+  </body>
+</html>
